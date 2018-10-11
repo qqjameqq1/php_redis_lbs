@@ -1,0 +1,22 @@
+{
+    "name": "gaopengfei/redis_lbs",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "gaofeifiy",
+            "email": "5173180@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "predis/predis": "^1.1"
+
+    },
+    "autoload": {
+        "classmap": ["src/"],
+        "files": ["src/helpers.php"],
+        "psr-4": {
+            "LBS\\": "src/"
+        }
+    }
+}
