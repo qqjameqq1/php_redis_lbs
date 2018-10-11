@@ -1,14 +1,14 @@
-# 安装
-需要使用composer，[安装composer](https://getcomposer.org/download/), [composer中国镜像](http://www.phpcomposer.com/)
+# 安裝
+需要使用composer，[安裝composer](https://getcomposer.org/download/)
 
-如果是应用在项目当中的话找到根目录，需要和 `composer.json`同级
+如果是應用在項目當中的話找到根目錄，需要和 `composer.json`同級
 
 ```
-composer require gaopengfei/redis_lbs
+composer require qqjameqq1/php_redis_lbs
 ```
 
 ## 配置
-如果不是 `laravel` 框架的话，需要修改配置文件 `src/config/config.php`
+如果不是 `laravel` 框架的話，需要修改配置文件 `src/config/config.php`
 ```
   'geoset_name' => 'LBS_set',
     'radium_option' => [
@@ -17,41 +17,41 @@ composer require gaopengfei/redis_lbs
         'WITHHASH' => false,
     ],
     'redis_connection' => [
-        'host'     => '127.0.0.1',      //连接地址
+        'host'     => '127.0.0.1',      //連接地址
         'port'     => 6379,             //端口
-        'database' => 1,                //库索引
-        'password' => null,             //密码
+        'database' => 1,                //庫索引
+        'password' => null,             //密碼
     ],
 
 ```
-***但是***，如果是在 `vendor` 文件夹下修改就不能将它从版本库中移除了，所以也可以按照以上的格式写一个数组初始化的时候添加进去比如:
+***但是***，如果是在 `vendor` 文件夾下修改就不能將它從版本庫中移除了，所以也可以按照以上的格式寫一個數組初始化的時候添加進去比如:
 ```
 $config = [
               'geoset_name' => 'LBS_set',         //集合名
-              'radium_option' => [                //搜寻附近的人的时候定义的一些参数
+              'radium_option' => [                //搜尋附近的人的時候定義的一些參數
                   'WITHDIST' => true,
                   'SORT' => 'asc',
                   'WITHHASH' => false,
               ],
               'redis_connection' => [
-                  'host'     => '127.0.0.1',      //连接地址
+                  'host'     => '127.0.0.1',      //連接地址
                   'port'     => 6379,             //端口
-                  'database' => 1,                //库索引
-                  'password' => null,             //密码
+                  'database' => 1,                //庫索引
+                  'password' => null,             //密碼
               ],
           ];
  $lbs = new \LBS\Services\LBSService($config);
 ```
 
-如果是 `laravel` 框架下，需要编辑 `config/app.php`
+如果是 `laravel` 框架下，需要編輯 `config/app.php`
 ```
  'providers' => [
     ...
      \LBS\Provider\RedisLbsProvider::class,
     ...
   ],
- 
- //如果需要facade模式的话也可以开一下
+
+ //如果需要facade模式的話也可以開一下
   'aliases' => [
     ...
     'LBSServer' => \LBS\Facade\LBSServer::class,
@@ -59,28 +59,28 @@ $config = [
   ]
 ```
 
-然后执行
+然後執行
 ```
 php artisan vendor:publish
 ```
-将生成 `config/redis_lbs.php` 配置文件，配置文件中的
+將生成 `config/redis_lbs.php` 配置文件，配置文件中的
 ```
-//是否应用在laravel当中
+//是否應用在laravel當中
 'is_laravel' => false,
 //使用laravel的redis版本
 'laravel_redis' => 'default',
 ```
-当 `is_laravel => true` 的时候， `laravel_redis => 'default'` 将调用 `config/database.php`下的redis相应的配置
+當 `is_laravel => true` 的時候， `laravel_redis => 'default'` 將調用 `config/database.php`下的redis相應的配置
 
 
-有以下三种使用方式
+有以下三種使用方式
 ```
 1> $lbs = new \LBS\Services\LBSServer();
 
 2> public function __construct(LBSInterface $LBS)
        {
            $list = $LBS->list($LBS->geoset_name);
-   
+
            dd($list);
        }
    }
@@ -133,9 +133,9 @@ $add_params = [
 
 ];
 /**
- * 在集合中新加一个坐标
+ * 在集合中新加一個坐標
  * @param array $params
- *  结构是 ['name'=>'xxx','long'=>'1.2321','lat'=>'1.3112']或者[['name'=>'xxx','long'=>'1.2321','lat'=>'1.3112']]
+ *  結構是 ['name'=>'xxx','long'=>'1.2321','lat'=>'1.3112']或者[['name'=>'xxx','long'=>'1.2321','lat'=>'1.3112']]
  * @param null $key
  * @return int
  */
@@ -145,12 +145,12 @@ $res = $lbs->add($add_params);
 int 6
 ```
 
-## 删除
+## 刪除
 ```
 /**
- * 删除集合中指定元素
+ * 刪除集合中指定元素
  * @param $name
- * @param null $key  默认存在集合，可以指定
+ * @param null $key  默認存在集合，可以指定
  * @return int
  */
 $res = $lbs->del('gao1');
@@ -163,20 +163,20 @@ int 0 或 1
 $res = $lbs->del('gao1','set-name');
 ```
 
-## 用坐标查询附近的单位
+## 用坐標查詢附近的單位
 ```
 /**
- * 查询范围内元素，如果不转 key就用默认的
- * @param $long     经度
- * @param $lat      纬度
- * @param $radius   范围
- * @param $unit     单位  (仅支持 m,km,ft,mi)
+ * 查詢範圍內元素，如果不轉 key就用默認的
+ * @param $long     經度
+ * @param $lat      緯度
+ * @param $radius   範圍
+ * @param $unit     單位  (僅支持 m,km,ft,mi)
  * @param null $key 集合名
  * @return mixed
  */
 $search = $lbs->search('116.435182767868','39.91811857809279',500,'m');
 
-返回数组
+返回數組
 array:4 [▼
   0 => array:2 [▼
     "name" => "fesco"
@@ -197,19 +197,19 @@ array:4 [▼
 ]
 ```
 
-## 根据已有的位置查询
+## 根據已有的位置查詢
 ```
 /**
- * 根据集合中的元素查询范围内元素，如果不转 key就用默认的
+ * 根據集合中的元素查詢範圍內元素，如果不轉 key就用默認的
  * @param $name         集合中的元素名
- * @param $radius       范围
- * @param $unit         单位
+ * @param $radius       範圍
+ * @param $unit         單位
  * @param null $key     集合名
  * @return mixed
  */
 $search = $lbs->->searchByMembers('fesco',500,'m');
 
-返回数组
+返回數組
 array:4 [▼
   0 => array:2 [▼
     "name" => "fesco"
@@ -230,18 +230,18 @@ array:4 [▼
 ]
 ```
 
-## 列出集合的所有值（其实就是 zrange)
+## 列出集合的所有值（其實就是 zrange)
 ```
 /**
- * 列出集合中的内容
+ * 列出集合中的內容
  * @param $key          集合的key
  * @param int $start    起始位置
- * @param int $end      结束位置 -1 为直到末尾
+ * @param int $end      結束位置 -1 為直到末尾
  * @return array
  */
 $list = $lbs->list($test->geoset_name,2,-1);
 
-返回数组
+返回數組
 array:6 [▼
   0 => "jianguomen"
   1 => "yabao_road"
@@ -251,6 +251,3 @@ array:6 [▼
   5 => "chaoyangmen"
 ]
 ```
-
-
-
