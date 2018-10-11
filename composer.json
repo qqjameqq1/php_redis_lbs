@@ -1,10 +1,10 @@
 {
-    "name": "gaopengfei/redis_lbs",
+    "name": "qqjameqq1/php_redis_lbs",
     "license": "GPL",
     "authors": [
         {
-            "name": "gaofeifiy",
-            "email": "5173180@qq.com"
+            "name": "qqjameqq1",
+            "email": "qqjameqq1@gmail.com"
         }
     ],
     "require": {
