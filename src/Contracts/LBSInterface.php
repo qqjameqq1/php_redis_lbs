@@ -1,12 +1,5 @@
 <?php
 namespace LBS\Contracts;
-/**
- * Created by PhpStorm.
- * User: gaopengfei
- * Date: 2017/3/10
- * Time: 下午7:06
- */
-
 
 interface LBSInterface
 {
@@ -16,9 +9,9 @@ interface LBSInterface
      * @param array $params
      * @return mixed
      */
-    public function add(array $params,$key = null);
+    public function add(array $params, $key = null);
 
-    public function del($name,$key = null);
+    public function del($name, $key = null);
 
     /**
      * 查询指定坐标范围内的所有存在内容
@@ -29,7 +22,7 @@ interface LBSInterface
      * @param $unit
      * @return mixed
      */
-    public function search($long,$lat,$radius,$unit,$key);
+    public function search($long, $lat, $radius, $unit, $key);
 
     /**
      * 查询集合中某个元素的范围内元素
@@ -39,7 +32,7 @@ interface LBSInterface
      * @param $unit
      * @return mixed
      */
-    public function searchByMembers($name,$radius,$unit,$key);
+    public function searchByMembers($name, $radius, $unit, $key);
 
     /**
      * 坐标转geohash
@@ -47,7 +40,7 @@ interface LBSInterface
      * @param $lat
      * @return mixed
      */
-    public function geoEncode($long,$lat);
+    public function geoEncode($long, $lat);
 
     /**
      * geohash转坐标
@@ -65,6 +58,4 @@ interface LBSInterface
      * @return mixed
      */
     public function list($key, $start = 0, $end = -1);
-
-
 }

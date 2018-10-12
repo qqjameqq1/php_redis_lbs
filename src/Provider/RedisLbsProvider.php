@@ -1,12 +1,4 @@
 <?php
-
-/**
- * Created by PhpStorm.
- * User: gaopengfei
- * Date: 2017/3/13
- * Time: 下午5:21
- */
-
 namespace LBS\Provider;
 
 use Illuminate\Support\ServiceProvider;
@@ -23,15 +15,17 @@ class RedisLbsProvider extends ServiceProvider
      */
     protected $defer = true;
 
-    public function boot(){
+    public function boot()
+    {
         $this->publishes([
             __DIR__.'/../config/config.php' => config_path('redis_lbs.php'),
         ]);
     }
 
-    public function register(){
-        $this->app->bind(LBSInterface::class,LBSServer::class);
-        $this->app->singleton('LBSServer',function(){
+    public function register()
+    {
+        $this->app->bind(LBSInterface::class, LBSServer::class);
+        $this->app->singleton('LBSServer', function () {
             return new LBSServer();
         });
     }
@@ -45,5 +39,4 @@ class RedisLbsProvider extends ServiceProvider
     {
         return [LBSInterface::class,'LBSServer'];
     }
-
 }

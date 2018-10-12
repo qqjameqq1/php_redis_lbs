@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gaopengfei
- * Date: 2017/3/11
- * Time: 下午1:12
- */
-
 namespace LBS\Services;
 
 use Predis\Client;

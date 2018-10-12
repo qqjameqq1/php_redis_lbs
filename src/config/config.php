@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: gaopengfei
- * Date: 2017/3/11
- * Time: 下午9:22
- */
 return [
     //是否应用在laravel当中
     'is_laravel' => false,
